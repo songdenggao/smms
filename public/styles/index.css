@@ -14,7 +14,6 @@
 }
 
 .el-main {
-    background-image:url('../images/love.png');
     color: #333;
     text-align: center;
 }
@@ -48,7 +47,7 @@ body {
     padding-right: 20px;
 }
 
-aside p {
+.el-aside p {
     font-size: 12px;
 }
 
@@ -69,7 +68,7 @@ aside p {
     margin-top: 10px
 }
 
-.el-submenu__title {
+.el-submenu .el-submenu__title {
     background-image: url('../images/menu_bg.png');
     height: 33px;
     line-height: 33px;
@@ -83,15 +82,20 @@ aside p {
     padding: 0;
 }
 
-.el-submenu__title i {
+.el-submenu .el-submenu__title i {
     color: #fff;
 }
 
-.el-menu-item {
+.el-menu-item-group .el-menu-item {
     color: #fff;
     line-height: 33px;
     height: 33px;
 }
+
+.el-menu-item-group .el-menu-item a{
+    color:#fff;
+    text-decoration: none;
+} 
 
 .el-menu-item-group .el-menu-item.is-active {
     background-color: transparent;
@@ -107,7 +111,6 @@ aside p {
     text-align: left;
     padding: 20px;
     height: 100px !important;
-    background-color: transparent
 }
 
 .el-header h2 {
@@ -143,12 +146,12 @@ aside p {
     padding: 10px 10px;
     text-align: left;
     background-color: #ccc;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
 }
 
 .el-card .el-card__body .el-alert {
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 .el-table__body-wrapper {
@@ -160,7 +163,7 @@ aside p {
     color: #333;
     text-align: left;
     border-top: 1px solid #ccc;
-    margin-top: 10px;
+    padding-top: 20px;
 }
 
 /* userAdd */

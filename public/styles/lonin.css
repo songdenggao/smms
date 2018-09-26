@@ -9,8 +9,8 @@ html,body{
     position: relative;
 }
 
-.login{
-    background-color: floralwhite;
+.login-form{
+    background-color: #fff;
     width: 400px;
     height: 320px;
     position: absolute;
@@ -22,6 +22,8 @@ html,body{
     top: 0;
     bottom: 0;
     margin: auto
+}
 
-
+.login-form .title{
+    margin-left: 42px;
 }
