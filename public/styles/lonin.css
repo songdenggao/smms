@@ -1,0 +1,27 @@
+html,body{
+    padding: 0;
+    margin: 0;
+    height: 100%;
+    background-image: url('../images/Jason.png')
+}
+#app{
+    height: 100%;
+    position: relative;
+}
+
+.login{
+    background-color: floralwhite;
+    width: 400px;
+    height: 320px;
+    position: absolute;
+    padding-right: 30px;
+    border-radius: 7px;
+
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto
+
+
+}

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>测试页面</title>
+    <!-- 引入elementui.min.css -->
+    <link rel="stylesheet" href="./libs/elementui/css/elementui.min.css">
+    <!-- 引入login.css -->
+    <link rel="stylesheet" href="./styles/index.css">
+
+    <!-- 引入vue.min/js -->
+    <script src="./libs/vue/vue.min.js"></script>
+    <!-- 引入elementui.min.js -->
+    <script src="./libs/elementui/js/elementui.min.js"></script>
+
+
+</head>
+
+<body>
+    <div id="app">
+        <!-- 整个页面的容器 -->
+        <el-container>
+            <el-aside width="230px">
+                <!-- 左侧导航上部分文本 -->
+                <div class="menu-top-text">
+
+                    <h2>华联超市管理系统</h2>
+                    <p>你好，admin</p>
+                    <p><a href="#">管理首页</a>|<a href="#">退出系统</a></p>
+                </div>
+                <!-- 导航菜单 -->
+                <el-menu :unique-opened="true">
+                    <!-- 分类管理 -->
+                    <el-submenu index="1">
+                        <template slot="title"><i class="el-icon-message"></i>分类管理</template>
+                        <el-menu-item-group>
+                            <el-menu-item index="1-1">分类管理</el-menu-item>
+                            <el-menu-item index="1-2">添加分类</el-menu-item>
+                        </el-menu-item-group>
+                    </el-submenu>
+                    <!-- 商品管理 -->
+                    <el-submenu index="2">
+                        <template slot="title"><i class="el-icon-message"></i>商品管理</template>
+                        <el-menu-item-group>
+                            <el-menu-item index="2-1">商品管理</el-menu-item>
+                            <el-menu-item index="2-2">添加商品</el-menu-item>
+                        </el-menu-item-group>
+                    </el-submenu>
+                    <!-- 进货管理 -->
+                    <el-submenu index="3">
+                        <template slot="title"><i class="el-icon-message"></i>进货管理</template>
+                        <el-menu-item-group>
+                            <el-menu-item index="3-1">库存管理</el-menu-item>
+                            <el-menu-item index="3-2">添加库存</el-menu-item>
+                        </el-menu-item-group>
+                    </el-submenu>
+                    <!-- 出货管理 -->
+                    <el-submenu index="4">
+                        <template slot="title"><i class="el-icon-message"></i>出货管理</template>
+                        <el-menu-item-group>
+                            <el-menu-item index="4-1">销售列表</el-menu-item>
+                            <el-menu-item index="4-2">商品出库</el-menu-item>
+                            <el-menu-item index="4-3">商品退货</el-menu-item>
+                        </el-menu-item-group>
+                    </el-submenu>
+                    <!-- 统计管理 -->
+                    <el-submenu index="5">
+                        <template slot="title"><i class="el-icon-message"></i>统计管理</template>
+                        <el-menu-item-group>
+                            <el-menu-item index="5-1">销售统计</el-menu-item>
+                            <el-menu-item index="5-2">进货统计</el-menu-item>
+                        </el-menu-item-group>
+                    </el-submenu>
+                    <!-- 账号管理 -->
+                    <el-submenu index="6">
+                        <template slot="title"><i class="el-icon-message"></i>账号管理</template>
+                        <el-menu-item-group>
+                            <el-menu-item index="6-1">添加账号</el-menu-item>
+                            <el-menu-item index="6-2">账号列表</el-menu-item>
+                            <el-menu-item index="6-3">密码修改</el-menu-item>
+                        </el-menu-item-group>
+                    </el-submenu>
+                    <!-- 会员管理 -->
+                    <el-submenu index="7">
+                        <template slot="title"><i class="el-icon-message"></i>账号管理</template>
+                        <el-menu-item-group>
+                            <el-menu-item index="7-1">账号管理</el-menu-item>
+                            <el-menu-item index="7-2">添加账号</el-menu-item>
+                        </el-menu-item-group>
+                    </el-submenu>
+                    <!-- 系统信息 -->
+                    <el-submenu index="8">
+                        <template slot="title"><i class="el-icon-message"></i>系统管理</template>
+                        <el-menu-item-group>
+                            <el-menu-item index="8-1">系统信息</el-menu-item>
+                            <el-menu-item index="8-1">系统配置</el-menu-item>
+                            <el-menu-item index="8-1">权限管理</el-menu-item>
+                            <el-menu-item index="8-1">添加管理组</el-menu-item>
+                        </el-menu-item-group>
+                    </el-submenu>
+                </el-menu>
+
+            </el-aside>
+            <!-- 右侧内容容器 -->
+            <el-container>
+                <!-- 右侧头部 -->
+                <el-header>
+                    <h2>欢迎你 admin</h2>
+                    <p>查看和管理所有分类</p>
+                </el-header>
+                <!-- 右侧主体 -->
+                <el-main>
+                    <el-card class="box-card">
+                        <div slot="header" class="clearfix">
+                            <span>添加管理</span>
+                        </div>
+                        <div class="text item">
+                            <el-form :model="AddclassForm" :rules="rules" class="AddclassForm" ref="AddclassForm" label-width="100px" class="demo-AddclassForm">
+                                <el-form-item label="所属分类：" prop="region">
+                                    <el-select v-model="AddclassForm.region" placeholder="-----顶级分类-----">
+                                        <el-option label="零食" value="零食"></el-option>
+                                        <el-option label="饮品" value="饮品"></el-option>
+                                    </el-select>
+                                </el-form-item>
+                                <el-form-item label="分类名称：" prop="name">
+                                    <el-input v-model="AddclassForm.name"></el-input>
+                                </el-form-item>
+                                <el-form-item label="状态：" prop="resource">
+                                    <el-radio-group v-model="AddclassForm.resource">
+                                        <el-radio label="启用"></el-radio>
+                                        <el-radio label="禁用"></el-radio>
+                                    </el-radio-group>
+                                </el-form-item>
+                                <el-form-item>
+                                    <el-button type="success" @click="submitForm('AddclassForm')">添加</el-button>
+                                    <el-button @click="resetForm('AddclassForm')">重置</el-button>
+                                </el-form-item>
+                            </el-form>
+
+                        </div>
+                    </el-card>
+                </el-main>
+                <el-footer>&copy; Copyright 2018 华联超市管理系统</el-footer>
+            </el-container>
+        </el-container>
+    </div>
+
+    <script>
+        //创建实例
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+                    AddclassForm: {
+                        region: '',
+                        name: '',
+                        delivery: false,
+                        resource: '',
+                    },
+                    rules: {
+                        region: [{
+                            required: true,
+                            message: '请选择所属分类',
+                            trigger: 'change'
+                        }],
+                        name: [{
+                                required: true,
+                                message: '请输入分类名称',
+                                trigger: 'blur'
+                            },
+                            {
+                                min: 3,
+                                max: 5,
+                                message: '长度在 3 到 5 个字符',
+                                trigger: 'blur'
+                            }
+                        ],
+                        resource: [{
+                            required: true,
+                            message: '请选启用或禁用',
+                            trigger: 'change'
+                        }],
+                    }
+                };
+            },
+            methods: {
+                submitForm(formName) {
+                    this.$refs[formName].validate((valid) => {
+                        if (valid) {
+                            alert('submit!');
+                        } else {
+                            console.log('error submit!!');
+                            return false;
+                        }
+                    });
+                },
+                resetForm(formName) {
+                    this.$refs[formName].resetFields();
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
