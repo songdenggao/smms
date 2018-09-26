@@ -63,12 +63,19 @@
                             <!-- 右侧 -->
                             <el-col :span="12">
                                 <div class="grid-content bg-purple-light">
-                                    <div slot="header" class="clearfix">
-                                        <span>销售排行</span>
-                                    </div>
-                                    <div class="text item">
-                                        11111
-                                    </div>
+                                    <el-card>
+                                        <div slot="header" class="clearfix">
+                                            <span>销售排行</span>
+                                        </div>
+                                        <div class="text item">
+                                            <el-table :data="tableData" style="width: 100%">
+                                                <el-table-column prop="goodsname" label="商品名称">
+                                                </el-table-column>
+                                                <el-table-column prop="sales" label="销量">
+                                                </el-table-column>
+                                            </el-table>
+                                        </div>
+                                    </el-card>
                                 </div>
                             </el-col>
                         </el-row>
