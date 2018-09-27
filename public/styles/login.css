@@ -27,3 +27,7 @@ html,body{
 .login-form .title{
     margin-left: 42px;
 }
+.login-form a{
+    color:#333;
+    text-decoration: none;
+}

@@ -65,13 +65,15 @@
                                 <div class="grid-content bg-purple-light">
                                     <el-card>
                                         <div slot="header" class="clearfix">
-                                            <span>销售排行</span>
+                                            <span>缺货的商品</span>
                                         </div>
                                         <div class="text item">
-                                            <el-table :data="tableData" style="width: 100%">
+                                            <el-table :data="tableData1" style="width: 100%">
                                                 <el-table-column prop="goodsname" label="商品名称">
                                                 </el-table-column>
-                                                <el-table-column prop="sales" label="销量">
+                                                <el-table-column prop="sales" label="库存">
+                                                </el-table-column>
+                                                <el-table-column prop="operation" label="操作">
                                                 </el-table-column>
                                             </el-table>
                                         </div>
@@ -94,9 +96,14 @@
             data() {
                 return {
                     tableData: [{
-                        goodsname: '2016-05-02',
-                        sales: '王小虎',
+                        goodsname: '海飞丝',
+                        sales: '168',
 
+                    }],
+                    tableData1:[{
+                        goodsname:'优乐美',
+                        sales: '0',
+                        operation:'入库'
                     }]
                 }
             }
