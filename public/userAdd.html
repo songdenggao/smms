@@ -40,17 +40,17 @@
                         </div>
                         <div class="text item">
                             <!-- 添加账号的表单 -->
-                            <el-form :model="loginForm" class="addUserForm" status-icon :rules="rules2" ref="loginForm"label-width="100px" class="demo-ruleForm">
+                            <el-form :model="loginForm" :label-position="labelPosition" class="addUserForm" status-icon :rules="rules2" ref="loginForm"label-width="100px" class="demo-ruleForm">
                                 <!-- 用户名 -->
-                                <el-form-item label="用户名" prop="username">
+                                <el-form-item label="用户名：" prop="username">
                                     <el-input type="text" v-model="loginForm.username" autocomplete="off"></el-input>
                                 </el-form-item>
                                 <!-- 密码 -->
-                                <el-form-item label="密&emsp;码" prop="password">
+                                <el-form-item label="密&emsp;码：" prop="password">
                                     <el-input type="password" v-model="loginForm.password" autocomplete="off"></el-input>
                                 </el-form-item>
                                 <!-- 确认密码 -->
-                                <el-form-item label="确认密码" prop="cfpassword">
+                                <el-form-item label="确认密码：" prop="cfpassword">
                                     <el-input type="password" v-model="loginForm.cfpassword"></el-input>
                                 </el-form-item>
                                 <!-- 选择用户组 -->
@@ -91,6 +91,7 @@
                 };
 
                 return {
+                    labelPosition: 'top',
                     loginForm: {
                         username: '',
                         password: '',

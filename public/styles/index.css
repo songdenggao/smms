@@ -165,6 +165,11 @@ body {
     border-top: 1px solid #ccc;
     padding-top: 20px;
 }
+.el-form--label-top .el-form-item__label{
+    float: left;
+    font-weight: bold;
+
+}
 
 /* userAdd */
 .addUserForm {
@@ -181,5 +186,14 @@ body {
     text-align: left;
 }
 .AddclassForm .el-form-item__label{
+    word-wrap:break-word;
+}
+
+/* AddEditAccount */
+.AddEditAccount{
+    width: 400px;
+    text-align: left;
+}
+.AddEditAccount .el-form-item__label{
     word-wrap:break-word;
 }

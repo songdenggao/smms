@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>测试页面</title>
+    <!-- 引入elementui.min.css -->
+    <link rel="stylesheet" href="./libs/elementui/css/elementui.min.css">
+    <!-- 引入login.css -->
+    <link rel="stylesheet" href="./styles/index.css">
+
+    <!-- 引入vue.min/js -->
+    <script src="./libs/vue/vue.min.js"></script>
+    <!-- 引入elementui.min.js -->
+    <script src="./libs/elementui/js/elementui.min.js"></script>
+
+
+</head>
+
+<body>
+    <div id="app">
+        <!-- 整个页面的容器 -->
+        <el-container>
+            <!-- 右侧内容容器 -->
+            <el-container>
+                <!-- 右侧头部 -->
+                <el-header>
+                    <h2>欢迎你 admin</h2>
+                    <p>添加和编辑会员账号。带*为必填</p>
+                </el-header>
+                <!-- 右侧主体 -->
+                <el-main>
+                    <el-card class="box-card">
+                        <div slot="header" class="clearfix">
+                            <span>添加编辑账号</span>
+                        </div>
+                        <div class="text item">
+                            <el-form :model="AddEditAccount" :rules="rules" class="AddEditAccount" ref="AddEditAccount"
+                                label-width="100px" class="demo-AddEditAccount">
+
+                                <el-form-item label="真实名字：" prop="name">
+                                    <el-input v-model="AddEditAccount.name"></el-input>
+                                </el-form-item>
+                                <el-form-item label="会员卡卡号：" prop="cardNumber">
+                                    <el-input v-model="AddEditAccount.cardNumber"></el-input>
+                                </el-form-item>
+                                <el-form-item label="用户组：" prop="userGroup">
+                                    <el-select v-model="AddEditAccount.userGroup" placeholder="-----请选择会员-----">
+                                        <el-option label="普通会员-99%" value="普通会员-99%"></el-option>
+                                        <el-option label="超级会员-1%" value="超级会员-1%"></el-option>
+                                    </el-select>
+                                </el-form-item>
+                                <el-form-item label="身份证号：" prop="IDNumber">
+                                    <el-input v-model="AddEditAccount.IDNumber"></el-input>
+                                </el-form-item>
+                                <el-form-item label="用户状态：" prop="resource">
+                                    <el-radio-group v-model="AddEditAccount.resource">
+                                        <el-radio label="启用"></el-radio>
+                                        <el-radio label="禁用"></el-radio>
+                                    </el-radio-group>
+                                </el-form-item>
+                                <el-form-item label="手机号码：" prop="tel">
+                                    <el-input v-model="AddEditAccount.tel"></el-input>
+                                </el-form-item>
+                                <el-form-item label="座机号码：" prop="specialPlane">
+                                    <el-input v-model="AddEditAccount.specialPlane"></el-input>
+                                </el-form-item>
+                                <el-form-item label="邮箱地址：" prop="Email">
+                                    <el-input v-model="AddEditAccount.Email"></el-input>
+                                </el-form-item>
+                                <el-form-item label="地区选择：" prop="region">
+                                    <el-select v-model="AddEditAccount.region" placeholder="-----请选择省份-----">
+                                        <el-option label="零食" value="零食"></el-option>
+                                        <el-option label="饮品" value="饮品"></el-option>
+                                    </el-select>
+                                    <el-select v-model="AddEditAccount.region" placeholder="-----请选择城市-----">
+                                        <el-option label="零食" value="零食"></el-option>
+                                        <el-option label="饮品" value="饮品"></el-option>
+                                    </el-select>
+                                    <el-select v-model="value5" multiple placeholder="请选择">
+                                        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                                        </el-option>
+                                    </el-select>
+
+                                    <el-select v-model="value11" multiple collapse-tags style="margin-left: 20px;"
+                                        placeholder="请选择">
+                                        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+                                        </el-option>
+                                    </el-select>
+                                    <el-form-item label="详细地址：" prop="site">
+                                        <el-input v-model="AddEditAccount.site"></el-input>
+                                    </el-form-item>
+                                    <el-form-item label="邮政编码：" prop="zipCode">
+                                        <el-input v-model="AddEditAccount.zipCode"></el-input>
+                                    </el-form-item>
+                                </el-form-item>
+                                <el-form-item>
+                                    <el-button type="success" @click="submitForm('AddEditAccount')">添加</el-button>
+                                    <el-button @click="resetForm('AddEditAccount')">重置</el-button>
+                                </el-form-item>
+                            </el-form>
+
+                        </div>
+                    </el-card>
+                </el-main>
+                <el-footer>&copy; Copyright 2018 华联超市管理系统</el-footer>
+            </el-container>
+        </el-container>
+    </div>
+
+    <script>
+        //创建实例
+        new Vue({
+            el: '#app',
+            data() {
+                return {
+                    AddEditAccount: {
+                        name: '',
+                        cardNumber: '',
+                        userGroup: '',
+                        IDNumber: '',
+                        resource: '',
+                        tel: '',
+                        specialPlane: '',
+                        Email: '',
+                        region: '',
+                        site: '',
+                        zipCode: '',
+                        delivery: false,
+                    },
+                    rules: {
+                        userGroup:[
+                            { required: true, message: '请选择用户组', trigger: 'change' }],
+                        region: [
+                            { required: true, message: '请选择所属城市', trigger: 'change' }
+                        ],
+                        name: [
+                            { required: true, message: '请输入真实名字', trigger: 'blur' },
+                            { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+                        ],
+                        cardNumber: [
+                            { required: true, message: '请输入会员卡卡号', trigger: 'blur' },
+                            { min: 12, max: 12, message: '长度 12 个字符', trigger: 'blur' }
+                        ],
+                        IDNumber:[
+                            { required: true, message:'请输入身份证号', trigger: 'blur' },
+                            { min: 18, max: 18, message: '长度 18 个字符', trigger: 'blur'}
+                        ],
+                        Email:[
+                            { required: true, message: '请输入邮箱地址', trigger: 'blur' },
+                            { type: 'email', message: '请输入正确的邮箱地址', trigger: ['blur', 'change'] }
+                        ],
+                        resource: [
+                            {required: true,message: '请选启用或禁用',trigger: 'change'}
+                        ],
+                    },
+                    options: [{
+                        value: '选项1',
+                        label: '黄金糕'
+                    }, {
+                        value: '选项2',
+                        label: '双皮奶'
+                    }, {
+                        value: '选项3',
+                        label: '蚵仔煎'
+                    }, {
+                        value: '选项4',
+                        label: '龙须面'
+                    }, {
+                        value: '选项5',
+                        label: '北京烤鸭'
+                    }],
+                    value5: [],
+                    value11: []
+                };
+            },
+            methods: {
+                submitForm(formName) {
+                    this.$refs[formName].validate((valid) => {
+                        if (valid) {
+                            alert('submit!');
+                        } else {
+                            console.log('error submit!!');
+                            return false;
+                        }
+                    });
+                },
+                resetForm(formName) {
+                    this.$refs[formName].resetFields();
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

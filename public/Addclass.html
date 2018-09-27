@@ -37,7 +37,8 @@
                             <span>添加管理</span>
                         </div>
                         <div class="text item">
-                            <el-form :model="AddclassForm" :rules="rules" class="AddclassForm" ref="AddclassForm" label-width="100px" class="demo-AddclassForm">
+                            <el-form :model="AddclassForm" :rules="rules" class="AddclassForm" ref="AddclassForm"
+                                label-width="100px" :label-position="labelPosition" class="demo-AddclassForm">
                                 <el-form-item label="所属分类：" prop="region">
                                     <el-select v-model="AddclassForm.region" placeholder="-----顶级分类-----">
                                         <el-option label="零食" value="零食"></el-option>
@@ -73,6 +74,7 @@
             el: '#app',
             data() {
                 return {
+                    labelPosition: 'top',
                     AddclassForm: {
                         region: '',
                         name: '',
