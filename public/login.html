@@ -67,10 +67,12 @@
                             { required: true, message: '请输入用户名', trigger: 'blur' },//必填
                             { min: 5, max: 10, message: '长度在 5 到 10 个字符', trigger: 'blur' }//用户名长度
                         ],
+                        // 验证密码
                         password:[
                             {required:true, message:'请输入密码',trigger:'blur'},
                             { min: 6, max: 12, message: '长度在 6 到 12 个字符', trigger: 'blur' }
                         ],
+                        // 验证确认密码
                         cfpassword: [
                             { validator: checkPass, trigger: 'blur',required:true }
                         ],
@@ -78,16 +80,34 @@
                 };
             },
             methods: {
+                // 提交表单
                 submitForm(formName) {
                     this.$refs[formName].validate((valid) => {
+                        // 如果验证通过 valid就是true 否则 就是false
                         if (valid) {
-                            alert('验证成功，可以发送数据到后台！');
+                            let userInfo={
+                                username:this.loginForm.username,
+                                password:this.loginForm.password
+                            }
+                            // 发送ajax请求给后端，把用户名和密码发送给后端
+                            $.post('/users/checklogin',userInfo,function(data){
+                                // 判断 如果存在 弹出成功提示 跳到后台首页
+                                if(data.errcode===1){
+                                    alert(data.msg);
+                                    location.href='./index.html'
+                                }else{
+                                    // 否则 弹出失败提示
+                                    alert(data.msg)
+                                }
+                            })
                         } else {
+                            // 前端验证不通过 不允许提交
                             console.log('验证失败，数据发送失败！');
                             return false;
                         }
                     });
                 },
+                // 重置表单
                 resetForm(formName) {
                     this.$refs[formName].resetFields();
                 }

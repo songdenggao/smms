@@ -86,7 +86,7 @@
                     } else if (value !== this.loginForm.password) {
                         callback(new Error('两次密码不同，请重新输入！'));
                     } else {
-                        callback();
+                        callback();  // 成功的回调
                     }
                 };
 

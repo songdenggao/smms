@@ -19,7 +19,8 @@
     <script src="./libs/vue/vue.min.js"></script>
     <!-- 引入elementui.min.js -->
     <script src="./libs/elementui/js/elementui.min.js"></script>
-
+    <!-- 检测是否登录 -->
+    <script src="/users/checkIsLogin"></script>
 
 </head>
 
@@ -43,7 +44,7 @@
                         </div>
                         <div class="text item">
                             <!-- 用户列表表格 -->
-                            <el-table ref="multipleTable" :data="tableData" tooltip-effect="dark" style="width: 100%"@selection-change="handleSelectionChange">
+                            <el-table ref="multipleTable" :data="tableData" tooltip-effect="dark" style="width: 100%" @selection-change="handleSelectionChange">
                                 <!-- 选择框 -->
                                 <el-table-column type="selection" width="55">
                                 </el-table-column>
@@ -63,11 +64,11 @@
                                 <!-- 操作 -->
                                 <el-table-column label="操作">
                                     <template slot-scope="scope">
-                                        <el-button size="mini" type="primary" @click="handleEdit(scope.$index, scope.row)">
+                                        <el-button size="mini" type="primary" @click="handleEdit(scope.scope.id)">
                                             <i class="el-icon-edit"></i>
-                                            编辑
+                                            修改
                                         </el-button>
-                                        <el-button size="mini" type="danger" @click="handleDelete(scope.$index, scope.row)">
+                                        <el-button size="mini" type="danger" @click="handleDelete(scope.scope.id)">
                                             <i class="el-icon-delete"></i>
                                             删除
                                         </el-button>
@@ -75,6 +76,11 @@
                                 </el-table-column>
 
                             </el-table>
+                            <div style="margin-top: 20px; text-align: left;">
+                                <el-button @click="batchesDel()">批量删除</el-button>
+                                <el-button @click="deselectall()">取消选择</el-button>
+                            </div>
+
                         </div>
                     </el-card>
                 </el-main>
@@ -104,6 +110,12 @@
             },
             // 方法
             methods: {
+                // 修改方法
+                handleEdit(id){
+                    // console.log('修改', id)
+                    // 跳转到修改页面 把id传过去
+                    location.href=`./userEdit.html?id=${id}`
+                },
                 // 请求所有数据的方法
                 getAllUsers() {
                     //保留this 让他指向vue实例
@@ -135,6 +147,35 @@
                         }
                     })
                 },
+
+                // 批量删除
+                batchesDel(){
+                    // 保留this
+                    var _this=this;
+
+                    // 获取勾选的数据
+                    // 从勾选的数据里面 把id获取出来
+                    let idArr=this.multipleSelection.map(v=>v.id);
+
+                    // 如果用户没用选中
+                    if(!idArr.length){
+                        alert('请选择以后再操作！你是不是傻！');
+                        return false;
+                    }
+
+                    // 发送ajax 把这些id发送给后端
+                    $.post('/users/batchesdel', {"idArr": idArr}, function (data) {
+                        if (data.errcode === 1) {
+                            // 如果成功 弹出成功提示 
+                            alert(data.msg);
+                            // 刷新页面（重新再获取一下所有的数据）
+                            _this.getAllUsers();  
+                        } else {
+                            // 否则 弹出错误提示
+                            alert(data.msg);
+                        }
+                    })
+                },
                 // 表单选择函数
                 toggleSelection(rows) {
                     if (rows) {
@@ -145,7 +186,14 @@
                         this.$refs.multipleTable.clearSelection();
                     }
                 },
+                 // 取消选中
+                 deselectall() {
+                    this.$refs.multipleTable.clearSelection();
+                },
+
+                // 勾选就会触发的函数
                 handleSelectionChange(val) {
+                    // 把勾选中的数据 赋值给 multipleSelection
                     this.multipleSelection = val;
                 }
             },
